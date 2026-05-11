@@ -1,0 +1,102 @@
+1. MongoDB Installation Commands (Ubuntu/Linux)
+Update System:
+sudo apt update
+
+Install Required Packages:
+sudo apt install gnupg curl -y
+
+Import MongoDB Public Key:
+curl -fsSL https://pgp.mongodb.com/server-7.0.asc | \
+sudo gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg \
+--dearmor
+
+
+Add MongoDB Repository:echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+
+
+
+
+Update Packages Again
+sudo apt update
+
+
+Install MongoDB
+sudo apt install mongodb-org -y
+
+Start MongoDB Service
+sudo systemctl start mongod
+
+
+Enable MongoDB
+sudo systemctl enable mongod
+
+
+Check MongoDB Status
+sudo systemctl status mongod
+
+2. Open MongoDB Shell
+mongosh
+
+
+
+
+3. Create Database
+Create/Use Database:
+use studentDB
+
+
+4. Create Collection
+db.createCollection("students")
+
+
+5. INSERT Document
+Insert One Document
+db.students.insertOne({
+    name: "Ayesha",
+    age: 21,
+    course: "AI"
+})
+
+
+Insert Multiple Documents
+db.students.insertMany([
+    {name: "Shraddha", age: 22, course: "Data Science"},
+    {name: "Rahul", age: 20, course: "Cyber Security"}
+])
+
+
+6. QUERY Document
+Display All Documents
+db.students.find()
+Find Specific Document
+db.students.find({name: "Ayesha"})
+
+
+7. UPDATE Document
+Update One Document
+db.students.updateOne(
+    {name: "Ayesha"},
+    {$set: {course: "Machine Learning"}}
+)
+Update Multiple Documents
+db.students.updateMany(
+    {},
+    {$set: {status: "Active"}}
+)
+
+
+
+8. DELETE Document
+Delete One Document
+db.students.deleteOne({name: "Rahul"})
+Delete Multiple Documents
+db.students.deleteMany({status: "Active"})
+
+
+
+9. Drop Collection
+db.students.drop()
+
+
+10. Drop Database
+db.dropDatabase()
